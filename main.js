@@ -3,23 +3,23 @@
 // So we don't have to keep re-finding things on page, find DOM elements once:
 
 const $body = $("body");
-
+//Storylists
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
 const $favoritedStoriesList=$("#favorited-stories-list")
 const $myStoriesList=$("#my-stories-list")
-
+//user profile
 const $userProfile=$("#user-profile")
 const $userProfileContainer=$("#user-profile-container")
-
+//login and signup forms
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
-
+//nav links
 const $navAll=$("#nav-all")
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
-
+//more links
 const $userNavLinks=$(".user-nav-links")
 const $navSubmitNew=$("#nav-submit-new");
 const $navFavorites=$("#nav-favorites");
@@ -72,7 +72,5 @@ console.warn("HEY STUDENT: This program sends many debug messages to" +
 
 $(start);
 
- // this is where the app is being started from. Calls the start function but isn't calling it the same way as start() from global scope. I don't understand why. Jquery is invovled!
-// await start()
-
+//extra load stories button feature. Allows user to refresh stories page if they so desire. Definitely not necessary but leaving it in for now.
 $('#startbutton').on("click",start)

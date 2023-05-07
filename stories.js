@@ -21,7 +21,7 @@ async function getAndShowStoriesOnStart() {
 
 
 //add show star if logged in checked by boolean
-//add show delete button if we are in my stories section only! 
+//add show delete/trash button if we are in my stories section.
 function generateStoryMarkup(story,showDeleteBtn=false) {
   // console.debug("generateStoryMarkup", story);
   const hostName = story.getHostName();
@@ -38,30 +38,24 @@ function generateStoryMarkup(story,showDeleteBtn=false) {
     <small class="story-user">posted by ${story.username}</small>
   </li>
 `);
-  // if (showDeleteBtn===false){
-  // return $(`
-  //     <li id="${story.storyId}">
-  //       <a href="${story.url}" target="a_blank" class="story-link">
-  //         ${story.title}
-  //       </a>
-  //       <small class="story-hostname">(${hostName})</small>
-  //       <small class="story-author">by ${story.author}</small>
-  //       <small class="story-user">posted by ${story.username}</small>
-  //     </li>
-  //   `)};
-  //   if (showDeleteBtn===true){
-  //     return $(`
-  //     <li id="${story.storyId}">
-  //       <a href="${story.url}" target="a_blank" class="story-link">
-  //         ${story.title}
-  //       </a>
-  //       <small class="story-hostname">(${hostName})</small>
-  //       <small class="story-author">by ${story.author}</small>
-  //       <small class="story-user">posted by ${story.username}</small>
-  //     </li>
-  //   `)};
-
     }
+
+//generate story markup without the stars. Using for the favorites nav link feature that will only use the trash can for deletion of the favorite rather than star toggle
+function generateStoryMarkupWithoutStars(story,showDeleteBtn=false) {
+    const hostName = story.getHostName();
+    return $(`
+    <li id="${story.storyId}">
+    ${showDeleteBtn ? getDeleteBtnHTML() : ""}
+      <a href="${story.url}" target="a_blank" class="story-link">
+        ${story.title}
+      </a>
+      <small class="story-hostname">(${hostName})</small>
+      <small class="story-author">by ${story.author}</small>
+      <small class="story-user">posted by ${story.username}</small>
+    </li>
+  `);
+      }
+
 
 /** Make delete button HTML for story */
 
@@ -98,7 +92,7 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
-//under construction newStorySubmit! need to append new story to the storyList and dom
+// newStorySubmit! need to append new story to the storyList and dom
 // 1. grab data needed to run addStory func, author, title, url from the submit form
 //2. grab the username
 //3. run the addStory func
@@ -136,7 +130,7 @@ function putFavoritesOnPage(){
   }
 else{
   for (let story of currentUser.favorites) {
-    const $story=generateStoryMarkup(story,true);
+    const $story=generateStoryMarkupWithoutStars(story,true);
     $favoritedStoriesList.append($story)
   }} 
   $favoritedStoriesList.show()

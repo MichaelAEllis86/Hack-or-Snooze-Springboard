@@ -41,8 +41,8 @@ function navSubmitNewStoryClick(evt){
   $newStoryForm.show();
   $allStoriesList.show();
 }
-
 $navSubmitNew.on("click",navSubmitNewStoryClick);
+
 //updates UI to show current user's favorites. Hides all else but favorites list.
 function navFavoritesClick(evt){
   console.debug(navFavoritesClick, evt);
